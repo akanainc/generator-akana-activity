@@ -1,4 +1,4 @@
-# generator-akana-activity [![Build Status](https://secure.travis-ci.org/funnyenough/generator-akana-activity.png?branch=master)](https://travis-ci.org/funnyenough/generator-akana-activity)
+# generator-akana-activity
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -32,7 +32,7 @@ npm install -g generator-akana-activity
 Finally, initiate the generator:
 
 ```bash
-yo Akana Activity
+yo akana-activity
 ```
 
 Create symlink to the `lib` folder under your Policy Manager installation directory.
