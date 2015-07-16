@@ -49,7 +49,7 @@ module.exports = yeoman.generators.Base.extend({
     }, {
       type: 'input'
     , name: 'namespace'
-    , message: 'Name your Java package namespace'
+    , message: 'Name your Java package namespace (e.g. com.akana.activity.transform)'
     , default: this.config.get('namespace')
     },{
        type: 'input'
@@ -64,7 +64,11 @@ module.exports = yeoman.generators.Base.extend({
     this.prompt(prompts, function (props) {
       this.props = props;
       // To access props later use this.props.someOption;
-
+      this.props.rendererPackage = this.props.namespace + '.ui';
+      this.props.validatorPackage = this.props.rendererPackage + '.validator';
+      this.props.performerPackage = this.props.namespace + '.performer';
+      this.props.commonPackage = this.props.namespace + '.common';
+      this.props.modelPackage = this.props.commonPackage + '.model';
       this.config.set(this.props);
       done();
     }.bind(this));
@@ -88,6 +92,10 @@ module.exports = yeoman.generators.Base.extend({
 
     readme: function () {
       this.template('README.md');
+    },
+
+    renderer: function(){
+
     }
   },
 

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+<taglib>
+    <tlibversion>1.0</tlibversion>
+    <jspversion>1.1</jspversion>
+    <shortname>obssecurity</shortname>
+    <info>Tag library for  OBS Security</info>
+
+    <tag>
+        <name>secure</name>
+        <tagclass>com.soa.common.console.tags.obs.SecureTag</tagclass>
+        <info>
+            Checks whether a UI element should be displayed in a jsp page.
+        </info>
+        <attribute>
+            <name>action</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>businessAction</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>resourceType</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>objectKey</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>scopedKey</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>notSecure</name>
+        <tagclass>com.soa.common.console.tags.obs.NotSecureTag</tagclass>
+        <info>
+            Checks whether a UI element should be displayed in a jsp page.
+        </info>
+        <attribute>
+            <name>action</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>businessAction</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>resourceType</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>objectKey</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>scopedKey</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>systemRead</name>
+        <tagclass>com.soa.common.console.tags.obs.SystemReadSecureTag</tagclass>
+        <info>
+            Checks whether a UI element should be displayed in a jsp page.
+        </info>
+    </tag>
+    <tag>
+        <name>systemAdmin</name>
+        <tagclass>com.soa.common.console.tags.obs.SystemAdminSecureTag</tagclass>
+        <info>
+            Checks whether a UI element should be displayed in a jsp page.
+        </info>
+    </tag>
+    <tag>
+        <name>notSystemRead</name>
+        <tagclass>com.soa.common.console.tags.obs.NotSystemReadSecureTag</tagclass>
+        <info>
+            Checks whether a UI element should be displayed in a jsp page.
+        </info>
+    </tag>
+    <tag>
+        <name>notSystemAdmin</name>
+        <tagclass>com.soa.common.console.tags.obs.NotSystemAdminSecureTag</tagclass>
+        <info>
+            Checks whether a UI element should be displayed in a jsp page.
+        </info>
+    </tag>
+</taglib>
