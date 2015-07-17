@@ -1,4 +1,4 @@
-package <%= props.validatorPackage %>;
+package <%= props.rendererPackage %>;
 
 import com.digev.fw.exception.ErrorCode;
 import com.digev.fw.exception.GException;
@@ -26,10 +26,12 @@ public class <%= props.component %>ActivityDetailsBean extends BaseActivityDetai
 
 	private <%= props.component %>Activity activity;
 
+	@Override
 	protected void extractValuesFromParameters(HttpServletRequest request) {
 		
 	}
 
+	@Override
 	protected void setupActivity(Element activityElem) throws GException {
 		try {
 			Unmarshaller unmarshaller = context.createUnmarshaller();

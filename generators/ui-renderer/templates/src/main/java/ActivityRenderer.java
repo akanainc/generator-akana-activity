@@ -1,4 +1,4 @@
-package <%= props.validatorPackage %>;
+package <%= props.rendererPackage %>;
 
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +18,7 @@ public class <%= props.component %>ActivityRenderer extends BaseActivityRenderer
 
 	public static final Log log = Log.getLog(<%= props.component %>ActivityRenderer.class);
 
-
+	@Override
 	public void processContents(HttpServletRequest request) throws GException {
 		initializeRenderer(request);
 		this.getActivityInfo().setActivityDefinition(buildActivityElement(buildActivity(request), context, builders));
@@ -31,44 +31,43 @@ public class <%= props.component %>ActivityRenderer extends BaseActivityRenderer
 		return activity;
 	}
 
+	@Override
 	public Element createDefaultDefinition() throws GException {
 		<%= props.component %>Activity activity = new <%= props.component %>Activity();
 		//activity.setMessageName("message");
 		return buildActivityElement(activity, context, builders);
 	}
 
+	@Override
 	public String getContentLocation() {
 		return "/<%= props.rendererPackage %>/activity_details.jsp";
 	}
 
+	@Override
 	public String getDescription(Locale locale) {
 		return getLocalMessage(locale, "<%= props.namespace %>.description");
 	}
 
+	@Override
 	public String getIcon(Locale locale) {
 		return getLocalMessage(locale, "<%= props.namespace %>.icon");
 	}
 
+	@Override
 	public QName getInternalName() {
 		return new QName("urn:<%= props.namespace %>",
 			"<%= props.component %>Activity");
 	}
 
+	@Override
 	public String getMenuHoverHelp(Locale locale) {
 		return getLocalMessage(locale, "<%= props.namespace %>.menuHoverHelp");
 	}
 
+	@Override
 	public String getName(Locale locale) {
 		return getLocalMessage(locale, "<%= props.namespace %>.name");
 	}
 
-	@Override
-	public List<String> makeScriptKeysList(String s) throws GException {
-		return null;
-	}
 
-	@Override
-	public Object createDefaultActivity(ComplexProcess complexProcess, String s, boolean b) {
-		return null;
-	}
 }

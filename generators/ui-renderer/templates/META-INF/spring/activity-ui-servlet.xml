@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:osgi="http://www.eclipse.org/gemini/blueprint/schema/blueprint"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:osgix="http://www.eclipse.org/gemini/blueprint/schema/blueprint-compendium"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context.xsd  							
+  							http://www.springframework.org/schema/util 
+  							http://www.springframework.org/schema/util/spring-util-2.0.xsd  
+  							http://www.eclipse.org/gemini/blueprint/schema/blueprint-compendium
+							http://www.eclipse.org/gemini/blueprint/schema/blueprint-compendium/gemini-blueprint-compendium.xsd
+  							http://www.eclipse.org/gemini/blueprint/schema/blueprint
+  							http://www.eclipse.org/gemini/blueprint/schema/blueprint/gemini-blueprint.xsd">  							
+  				
+
+	<osgi:service interface='com.soa.transport.http.deploy.WebAppRegistration'>
+		<osgi:service-properties>
+			<entry key="name" value="<%= props.rendererPackage %>.app"/>
+		</osgi:service-properties>
+		<bean class='com.soa.transport.http.deploy.impl.SimpleWebAppRegistration'>
+			<property name='context' value='${context.path}'/>
+			<property name="resources">
+				<list>
+					<bean class='com.soa.transport.http.deploy.impl.SimpleResourceRegistration'>
+						<property name="pathSpec" value="/<%= props.rendererPackage %>/resources/*"/>
+						<property name='resources'>
+							<bean class='com.soa.transport.http.deploy.impl.SimpleHttpContext'>
+								<property name='prefix' value='/META-INF/resources'/>
+							</bean>
+						</property>
+						<property name="context" value="${context.path}"/>
+					</bean>				
+				</list>
+			</property>
+		</bean>
+	</osgi:service>
+			
+</beans>

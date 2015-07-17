@@ -1,4 +1,4 @@
-package <%= props.validatorPackage %>;
+package <%= props.rendererPackage %>;
 
 import com.digev.fw.exception.ErrorCode;
 import com.digev.fw.exception.GException;

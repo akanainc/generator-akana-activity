@@ -1,0 +1,155 @@
+<project name="<%= props.component.toLowerCase() %>-activity-ui" default="all">
+
+	<property file="project.properties"/>
+	
+	<property name="bundle.file" value="${dist.dir}/<%= props.rendererPackage %>_${major.version}.${minor.version}.${micro.version}.jar"/>
+	<property name="spring.web.xml" value="${root.dir}/META-INF/spring/servlet-export.xml"/>
+	<property name="l10n.dir" value="${root.dir}/OSGI-INF/l10n"/>
+	
+	<fileset id="third.party.jars" dir="${third.party.dir}">
+		<include name="*.jar"/>
+	</fileset>
+
+	<fileset id="dependent.jars" dir="${lib.dir}">
+		<include name="**/*.jar"/>
+	</fileset>
+	
+	<fileset id="dist.jars" dir="${dist.dir}">
+		<include name="*.jar"/>
+	</fileset>
+	
+	<path id="base.classpath">
+		<fileset refid="dependent.jars"/>
+		<fileset refid="dist.jars"/>
+	</path>
+	
+	<echo>classes.dir property is: ${classes.dir}</echo>
+	
+	<path id="tools.classpath">
+		<pathelement location="${classes.dir}"/>
+		<fileset dir="${third.party.dir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset refid="dependent.jars"/>
+		<fileset dir="${build.dir}/lib">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${build.dir}/bin"/>
+    </path>
+	
+	<taskdef name="webxml-convert" classname="com.soa.ant.j2ee.WebXMLConverterTask" classpathref="tools.classpath"/>	
+		
+	<taskdef name="jasper2" classname="org.apache.jasper.JspC">
+		<classpath>
+			<path refid="tools.classpath"/>
+		</classpath> 
+	</taskdef>		
+		
+	<target name="all" description="Build it all." depends="bundle"/>
+	
+    <target name="clean" description="clean build artifacts">
+    	<echo>Cleaning <%= props.rendererPackage %></echo>
+    	
+    	<echo>Deleting ${classes.dir}</echo>
+        <delete dir="${classes.dir}" failonerror="false"/>
+        
+        <echo>Deleting ${jsp.src.dir}</echo>
+    	<delete dir="${jsp.src.dir}" failonerror="false"/>
+    	
+    	<echo>Deleting ${bundle.file}</echo>
+        <delete file="${bundle.file}" failonerror="false"/>
+        
+        <echo>Deleting ${tmp.webcnt.dir}</echo>
+    	<delete dir="${tmp.webcnt.dir}" failonerror="false"/>
+    	
+    </target>
+
+    <target name="init" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+    	<mkdir dir="${jsp.src.dir}"/>
+    	<mkdir dir="${tmp.webcnt.dir}"/>
+    </target>
+
+	<target name="compile" depends="jsp_compile">
+		<echo>compiling <%= props.rendererPackage %> JSPs</echo>
+  		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debug.level}" 
+  			optimize="off"
+  			nowarn="${nowarn}" target="${compile.version}">
+  			<src path="${src.dir}"/>
+  			<src path="${jsp.src.dir}"/>
+  			<include name="**/*.java"/>
+  			<classpath>
+  			    <path refid="base.classpath"/>
+  		 	</classpath>
+  		</javac>
+	</target>
+	
+	<target name="jsp_compile" depends="init">
+		<echo level="verbose">compiling <%= props.rendererPackage %>< Classes/echo>
+		<delete dir="${classes.dir}"/>
+		<mkdir dir="${classes.dir}"/>
+  		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debug.level}" 
+  			optimize="off"
+  			nowarn="${nowarn}" target="${compile.version}">
+  			<src path="${src.dir}"/>
+  			<include name="**/*.java"/>
+  			<classpath>
+  			    <path refid="base.classpath"/>
+  		 	</classpath>
+  		</javac>
+		
+	
+		<property name="cp" refid="tools.classpath"/>
+		
+		<!-- <echo>tools.classpath property is: ${cp}</echo> -->		
+		<echo level="verbose">java home: ${java.home}</echo>
+		
+		<echo level="verbose">third.party.dir is: ${third.party.dir}</echo>
+		<property name="jsps.webinf" value="${webcontent.dir}/WEB-INF"/>
+		<property name="jsps.src" value="${jsp.src.dir}"/>
+		<echo level="verbose">Converting JSPs to Java in WebContent ...</echo>
+		<delete failonerror="false">
+			 <fileset dir="${jsp.src.dir}" includes="**/*.java"/>
+		 </delete>
+		<copy overwrite="true"  todir="${tmp.webcnt.dir}">
+		    <fileset dir="${webcontent.dir}"/>
+		</copy>
+		
+		<property name="tmp.webcnt.dir.abs" location="${tmp.webcnt.dir}"/>
+		<echo>tmp.webcnt.dir.abs is: ${tmp.webcnt.dir.abs}</echo>
+		
+		<jasper2 
+			webXmlFragment="./web.xml"
+			validateXml="true" 
+			classdebuginfo="true" 
+			package="com.akana.jsp.activity.ui" 
+			listerrors="yes" 
+			addwebxmlmappings="yes" 
+			verbose="100"  
+			uriroot="${tmp.webcnt.dir.abs}"  
+			outputDir="${jsp.src.dir}"
+			classpath="${cp}" />
+    </target>
+	    
+
+	<target name="bundle" depends="compile">
+		<echo>creating <%= props.rendererPackage %> jar</echo>
+		<webxml-convert  webxml="${tmp.webcnt.dir}/WEB-INF/web.xml"  destfile="${spring.web.xml}" context="${context.path}"/>
+		<jar destfile="${bundle.file}" manifest="${root.dir}/META-INF/MANIFEST.MF" >
+			<fileset dir="${classes.dir}" includes="**/*.class"/>
+			<fileset dir="${src.dir}" casesensitive="yes">
+			  <patternset id="non.sources">
+			    <exclude name="**/*.java"/>
+			  </patternset>
+			</fileset>
+			<zipfileset dir="${spring.dir}" includes="*.*" prefix="META-INF/spring"/>
+			<zipfileset dir="${resources.dir}" prefix="META-INF/resources"/>
+			<zipfileset dir="${webcontent.dir}" includes="**/*.xml"  prefix="WebContent"/>
+			<zipfileset dir="${l10n.dir}" includes="**/*.*" prefix="OSGI-INF/l10n"/>
+		</jar>
+
+		<delete dir="${jsp.src.dir}" failonerror="false"/>
+		<delete dir="${tmp.webcnt.dir}" failonerror="false"/>
+	</target>	
+	
+</project>
