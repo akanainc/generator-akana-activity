@@ -1,0 +1,163 @@
+<project name="normalizeactivity" default="all">
+	<property name="javacdebug" value="on" />
+	<property name="nowarn" value="false" />
+	<property environment="env"/>
+	<property file="project.properties"/>
+	
+	<fileset id="dependent.jars" dir="${lib.dir}">
+		<include name="**/*.jar"/>
+	</fileset>
+
+	<echo>dependednt.jars is: ${dependednt.jars}</echo>
+		
+	<path id="base.classpath">
+		<pathelement location="${classes.dir}"/>
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+    </path>	
+	
+	<path id="tools.classpath">
+		<pathelement location="${classes.dir}"/>
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${third.party.dir}">
+			<include name="*.jar"/>
+		</fileset>
+    </path>	
+	
+	<taskdef name="svn-version" classname="com.dependednt.ant.svn.SVNVersionTask" classpathref="tools.classpath"/>
+	<taskdef name="webxml-convert" classname="com.dependednt.ant.j2ee.WebXMLConverterTask" classpathref="tools.classpath"/>	
+		
+	<target name="all" description="Build it all." depends="version, init, bundles"/>
+		
+    <target name="clean" description="clean build artifacts" 
+    	depends="init, 
+		runtime-clean,
+    	console-clean,
+		nd-feature-clean,
+		pm-feature-clean
+    	"/>
+
+	<target name="clean-build" description="clean and then build all">
+		<antcall target="clean"/>
+		<antcall target="all"/>
+	</target>
+	
+	<target name="init">
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+	
+	<target name="version" unless="svn.revision">
+		<echo>about to call target: version</echo>
+		<svn-version svnurl="${svn.root}" property="svn.revision"/>
+		<echo>svn.revision is: ${svn.revision}</echo>
+	</target>
+	
+	<target name="bundles" depends="
+		runtime,
+		console,
+		nd-feature,
+		pm-feature
+	"/>
+
+	<target name="runtime-clean">
+		<ant dir="${normalizeactivity.dir}/com.akana.activity.normalize/build" antfile="build.xml" inheritall="false" target="clean">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+		</ant>
+	</target>
+
+	<target name="runtime">
+		<ant dir="${normalizeactivity.dir}/com.akana.activity.normalize/build" antfile="build.xml" inheritall="false" target="all">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+			<property name="dependednt.jars" value="${dependednt.jars}"/>
+			<property name="major.version" value="${major.version}"/>
+			<property name="minor.version" value="${minor.version}"/>
+			<property name="micro.version" value="${svn.revision}"/>
+			<property name="svn.revision" value="${svn.revision}"/>
+			<property name="javacdebug" value="${javacdebug}"/>
+			<property name="nowarn" value="${nowarn}"/>
+			<property name="debuglevel" value="${debuglevel}"/>
+			<property name="compile.version" value="${compile.version}"/>
+			<property name="source.version" value="${source.version}"/>			
+		</ant>
+	</target>
+	
+	<target name="console-clean">
+		<ant dir="${normalizeactivity.dir}/com.akana.activity.normalize.ui/build" antfile="build.xml" inheritall="false" target="clean">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+		</ant>
+	</target>
+
+	<target name="console">
+		<ant dir="${normalizeactivity.dir}/com.akana.activity.normalize.ui/build" antfile="build.xml" inheritall="false" target="all">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+			<property name="dependednt.jars" value="${dependednt.jars}"/>
+			<property name="major.version" value="${major.version}"/>
+			<property name="minor.version" value="${minor.version}"/>
+			<property name="micro.version" value="${svn.revision}"/>
+			<property name="svn.revision" value="${svn.revision}"/>
+			<property name="javacdebug" value="${javacdebug}"/>
+			<property name="nowarn" value="${nowarn}"/>
+			<property name="debuglevel" value="${debuglevel}"/>
+			<property name="compile.version" value="${compile.version}"/>
+			<property name="source.version" value="${source.version}"/>			
+		</ant>
+	</target>
+	
+	<target name="nd-feature-clean">
+		<ant dir="${normalizeactivity.dir}/com.akana.feature.nd.normalizeactivity/build" antfile="build.xml" inheritall="false" target="clean">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+		</ant>			
+	</target>
+
+	<target name="nd-feature">
+		<ant dir="${normalizeactivity.dir}/com.akana.feature.nd.normalizeactivity/build" antfile="build.xml" inheritall="false" target="all">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+			<property name="dependednt.jars" value="${dependednt.jars}"/>
+			<property name="major.version" value="${major.version}"/>
+			<property name="minor.version" value="${minor.version}"/>
+			<property name="micro.version" value="${svn.revision}"/>
+			<property name="svn.revision" value="${svn.revision}"/>
+			<property name="javacdebug" value="${javacdebug}"/>
+			<property name="nowarn" value="${nowarn}"/>
+			<property name="debuglevel" value="${debuglevel}"/>
+			<property name="compile.version" value="${compile.version}"/>
+			<property name="source.version" value="${source.version}"/>
+		</ant>
+	</target>
+	
+	<target name="pm-feature-clean">
+		<ant dir="${normalizeactivity.dir}/com.akana.feature.pm.normalizeactivity/build" antfile="build.xml" inheritall="false" target="clean">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+		</ant>			
+	</target>
+
+	<target name="pm-feature">
+		<ant dir="${normalizeactivity.dir}/com.akana.feature.pm.normalizeactivity/build" antfile="build.xml" inheritall="false" target="all">
+			<property name="third.party.dir" value="${third.party.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+			<property name="dependednt.jars" value="${dependednt.jars}"/>
+			<property name="major.version" value="${major.version}"/>
+			<property name="minor.version" value="${minor.version}"/>
+			<property name="micro.version" value="${svn.revision}"/>
+			<property name="svn.revision" value="${svn.revision}"/>
+			<property name="javacdebug" value="${javacdebug}"/>
+			<property name="nowarn" value="${nowarn}"/>
+			<property name="debuglevel" value="${debuglevel}"/>
+			<property name="compile.version" value="${compile.version}"/>
+			<property name="source.version" value="${source.version}"/>		
+		</ant>
+	</target>
+	
+	 	
+</project>
