@@ -69,6 +69,10 @@ module.exports = yeoman.generators.Base.extend({
       this.props.performerPackage = this.props.namespace + '.performer';
       this.props.commonPackage = this.props.namespace + '.common';
       this.props.modelPackage = this.props.commonPackage + '.model';
+      this.props.rendererModule = this.props.rendererPackage;
+      this.props.performerModule = this.props.performerPackage;
+      this.props.rendererFeature = this.props.rendererPackage + '.feature';
+      this.props.performerFeature = this.props.performerPackage + '.feature';      
       this.config.set(this.props);
       done();
     }.bind(this));
