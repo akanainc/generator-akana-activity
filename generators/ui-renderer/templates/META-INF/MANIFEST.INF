@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Akana Normalize Activity UI
-Bundle-SymbolicName: com.akana.activity.normalize.ui
-Bundle-Version: 7.2.2
-Bundle-Vendor: SOA Software
+Bundle-Name: <%= props.title %> UI
+Bundle-SymbolicName: <%= props.rendererPackage %>;
+Bundle-Version: 8.0.0
+Bundle-Vendor: <%= props.author %> - <%= props.email %>
 Spring-Context: *;publish-context:=false
-Import-Package: com.akana.activity.normalize.model;version="7.2.0",
+Import-Package: <%= props.modelPackage %>;;version="7.2.0",
  com.digev.common.console.features.tags;version="6.0.0",
  com.digev.fw.exception;version="6.1.0",
  com.digev.fw.log;version="6.1.0",

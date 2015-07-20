@@ -17,46 +17,45 @@ module.exports = yeoman.generators.Base.extend({
     ));
 
     var prompts = [{
-    var prompts = [{
-       type: 'input'
-    , name: 'title'
-    , message: 'Name your project'
-    , default: this.config.get('title')
-    , validate: function (input) {
+      type: 'input',
+      name: 'title',
+      message: 'Name your project',
+      default: this.config.get('title'),
+      validate: function (input) {
         return input ? true : false;
       }
     }, {
-      type: 'input'
-    , name: 'description'
-    , message: 'What\'s your project about? (optional)'
-    , default: this.config.get('description') || null
+      type: 'input',
+      name: 'description',
+      message: 'What\'s your project about? (optional)',
+      default: this.config.get('description') || null
     }, {
-      type: 'input'
-    , name: 'author'
-    , message: 'What\'s your name?'
-    , default: this.config.get('author')
-    , validate: function (input) {
+      type: 'input',
+       name: 'author',
+      message: 'What\'s your name?',
+      default: this.config.get('author'),
+      validate: function (input) {
         return input ? true : false;
       }
     }, {
-      type: 'input'
-    , name: 'email'
-    , message: 'What\'s your email?'
-    , default: this.config.get('email')
-    , validate: function (input) {
+      type: 'input',
+      name: 'email',
+      message: 'What\'s your email?',
+      default: this.config.get('email'),
+      validate: function (input) {
         return validator.isEmail(input);
       }
     }, {
-      type: 'input'
-    , name: 'namespace'
-    , message: 'Name your Java package namespace (e.g. com.akana.activity.transform)'
-    , default: this.config.get('namespace')
+      type: 'input',
+      name: 'namespace',
+      message: 'Name your Java package namespace (e.g. com.akana.activity.transform)',
+      default: this.config.get('namespace')
     },{
-       type: 'input'
-    , name: 'component'
-    , message: 'Name your Java class prefix (TitleCase - Alphanumeric)'
-    , default: this.config.get('component')
-    , validate: function (input) {
+      type: 'input',
+      name: 'component',
+      message: 'Name your Java class prefix (TitleCase - Alphanumeric)',
+      default: this.config.get('component'),
+      validate: function (input) {
         return validator.isAlphanumeric(input);
       }
     }];
@@ -98,12 +97,27 @@ module.exports = yeoman.generators.Base.extend({
       this.template('README.md');
     },
 
-    renderer: function(){
+    build: function(){
+      this.composeWith('akana-activity:build-repository', {}, {
+        link: 'strong'
+      }) 
+    },
 
+    renderer: function(){
+      this.composeWith('akana-activity:ui-renderer', {}, {
+        link: 'strong'
+      })
     }
   },
 
   install: function () {
-    this.installDependencies();
+    //this.installDependencies();
+  },
+
+  end: function () {
+    this.config.save();
+    this.log(yosay(
+      'Alright, ' + chalk.red(superheroes.random()) +  ' you are all set!'
+    ));
   }
 });
