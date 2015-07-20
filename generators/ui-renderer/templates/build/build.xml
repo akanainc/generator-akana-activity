@@ -34,7 +34,7 @@
 		<fileset dir="${build.dir}/lib">
 			<include name="*.jar"/>
 		</fileset>
-		<pathelement location="${build.dir}/bin"/>
+		<pathelement location="${build.dir}/target/classes"/>
     </path>
 	
 	<taskdef name="webxml-convert" classname="com.soa.ant.j2ee.WebXMLConverterTask" classpathref="tools.classpath"/>	
@@ -85,7 +85,7 @@
 	</target>
 	
 	<target name="jsp_compile" depends="init">
-		<echo level="verbose">compiling <%= props.rendererPackage %>< Classes/echo>
+		<echo level="verbose">compiling <%= props.rendererPackage %> Classes</echo>
 		<delete dir="${classes.dir}"/>
 		<mkdir dir="${classes.dir}"/>
   		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debug.level}" 

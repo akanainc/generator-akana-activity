@@ -20,7 +20,6 @@ module.exports = yeoman.generators.Base.extend({
   	this.directory('src', 'build/src');
     this.template(path.join('build', 'build.xml'), path.join('build', 'build.xml'), null, { 'interpolate': /<%=([\s\S]+?)%>/g });
     this.template(path.join('build', 'project.properties'), path.join('build', 'project.properties'));
-    //this.template(path.join('build', 'build.properties'), path.join('build', 'build.properties'));
     //this.template('pom.xml', 'pom.xml', null, { 'interpolate': /<%=([\s\S]+?)%>/g});
   }
 });

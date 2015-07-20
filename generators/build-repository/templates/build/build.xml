@@ -4,6 +4,8 @@
 	<property environment="env"/>
 	<property file="project.properties"/>
 	
+	<echo>lib.jar is: ${lib.dir}</echo>
+
 	<fileset id="dependent.jars" dir="${lib.dir}">
 		<include name="**/*.jar"/>
 	</fileset>
@@ -64,14 +66,14 @@
 	"/>
 
 	<target name="runtime-clean">
-		<ant dir="${project.dir}/com.akana.activity.normalize/build" antfile="build.xml" inheritall="false" target="clean">
+		<ant dir="${project.dir}/<%= props.performerModule %>/build" antfile="build.xml" inheritall="false" target="clean">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 		</ant>
 	</target>
 
 	<target name="runtime">
-		<ant dir="${project.dir}/com.akana.activity.normalize/build" antfile="build.xml" inheritall="false" target="all">
+		<ant dir="${project.dir}/<%= props.performerModule %>/build" antfile="build.xml" inheritall="false" target="all">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 			<property name="dependednt.jars" value="${dependednt.jars}"/>
@@ -88,14 +90,14 @@
 	</target>
 	
 	<target name="console-clean">
-		<ant dir="${project.dir}/com.akana.activity.normalize.ui/build" antfile="build.xml" inheritall="false" target="clean">
+		<ant dir="${project.dir}/<%= props.rendererModule %>/build" antfile="build.xml" inheritall="false" target="clean">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 		</ant>
 	</target>
 
 	<target name="console">
-		<ant dir="${project.dir}/com.akana.activity.normalize.ui/build" antfile="build.xml" inheritall="false" target="all">
+		<ant dir="${project.dir}/<%= props.rendererModule %>/build" antfile="build.xml" inheritall="false" target="all">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 			<property name="dependednt.jars" value="${dependednt.jars}"/>
@@ -112,14 +114,14 @@
 	</target>
 	
 	<target name="nd-feature-clean">
-		<ant dir="${project.dir}/com.akana.feature.nd.normalizeactivity/build" antfile="build.xml" inheritall="false" target="clean">
+		<ant dir="${project.dir}/<%= props.performerFeature %>/build" antfile="build.xml" inheritall="false" target="clean">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 		</ant>			
 	</target>
 
 	<target name="nd-feature">
-		<ant dir="${project.dir}/com.akana.feature.nd.normalizeactivity/build" antfile="build.xml" inheritall="false" target="all">
+		<ant dir="${project.dir}/<%= props.performerFeature %>/build" antfile="build.xml" inheritall="false" target="all">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 			<property name="dependednt.jars" value="${dependednt.jars}"/>
@@ -136,14 +138,14 @@
 	</target>
 	
 	<target name="pm-feature-clean">
-		<ant dir="${project.dir}/com.akana.feature.pm.normalizeactivity/build" antfile="build.xml" inheritall="false" target="clean">
+		<ant dir="${project.dir}/<%= props.rendererFeature %>/build" antfile="build.xml" inheritall="false" target="clean">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 		</ant>			
 	</target>
 
 	<target name="pm-feature">
-		<ant dir="${project.dir}/com.akana.feature.pm.normalizeactivity/build" antfile="build.xml" inheritall="false" target="all">
+		<ant dir="${project.dir}/<%= props.rendererFeature %>/build" antfile="build.xml" inheritall="false" target="all">
 			<property name="third.party.dir" value="${third.party.dir}"/>
 			<property name="dist.dir" value="${dist.dir}"/>
 			<property name="dependednt.jars" value="${dependednt.jars}"/>
