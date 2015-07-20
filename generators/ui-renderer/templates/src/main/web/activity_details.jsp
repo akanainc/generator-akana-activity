@@ -2,15 +2,14 @@
 <%@ taglib uri="/features" prefix="feat"%>
 <%@ taglib uri="/strutsbean" prefix="bean"%>
 <%@ taglib uri="/workbench" prefix="workbench"%>
-<%@page import="<%= props.rendererPackage %>.<%= props.component %>ActivityDetailsBean"%>
-<%@page import="com.soa.container.configuration.virtualservices.Variable"%>
-<%@page import="java.util.List"%>
+<%@ page import="<@=props.rendererPackage@>.<@=props.component@>ActivityDetailsBean"%>
+<%@ page import="com.soa.container.configuration.virtualservices.Variable"%>
+<%@ page import="java.util.List"%>
 
 <%
-<%= props.component %>ActivityDetailsBean bean = new <%= props.component %>ActivityDetailsBean();
-bean.setup(request);
-request.setAttribute("bean", bean);
-
+	<@=props.component@>ActivityDetailsBean bean = new <@=props.component@>ActivityDetailsBean();
+	bean.setup(request);
+	request.setAttribute("bean", bean);
 %>
 
 <style>
@@ -34,13 +33,13 @@ request.setAttribute("bean", bean);
 </style>
 <script type="text/javascript" src="<%=request.getContextPath()%>/common/glb_dynamicTables.js"></script>
 <table style="width:100%"><tr><td>
-<fieldset><legend><workbench:message key="<%= props.namespace %>.detail.label"/></legend>
+<fieldset><legend><workbench:message key="<@=props.namespace@>.detail.label"/></legend>
 	<div>
-		<logic:notEmpty name="bean" property="errorMessage"><span class="error"><%=com.soa.console.util.Encoder.escapeHTML(bean.getErrorMessage())%></span>
+		<logic:notEmpty name="bean" property="errorMessage"><span class="error"><%= com.soa.console.util.Encoder.escapeHTML(bean.getErrorMessage())%></span>
 		</logic:notEmpty>
 	</div>
 	<!--p>
-		<span class="fieldname_nowrap col1"><workbench:message key="<%= props.namespace %>.message"/>:</span>
+		<span class="fieldname_nowrap col1"><workbench:message key="<@=props.namespace@>.message"/>:</span>
 		<input type="hidden" name="messageName" value="<bean:write name="bean" property="messageName"/>"/>
 		<select name="messageNameSelect">
 			<logic:iterate id="variable" name="bean" property="activityVariables">
