@@ -22,7 +22,7 @@ module.exports = yeoman.generators.Base.extend({
 
     this.directory('src/main/web/WEB-INF/tlds', path.join(this.props.rendererModule, 'src/main/webapps/WEB-INF/tlds'));
     this.template(path.join('src/main/web/WEB-INF', 'web.xml'), path.join(this.props.rendererModule, 'src/main/webapps/WEB-INF', 'web.xml'));
-    this.template(path.join('src/main/web', 'activity_details.jsp'), path.join(this.props.rendererModule, 'src/main/webapps', 'activity_details.jsp'), null, {
+    this.template(path.join('src/main/web', 'activity_details.jsp'), path.join(this.props.rendererModule, 'src/main/webapps', this.props.rendererPackage, 'activity_details.jsp'), null, {
                                                                         'escape': /<@-([\s\S]+?)@>/g,
                                                                         'evaluate': /<@([\s\S]+?)@>/g,
                                                                         'interpolate': /<@=([\s\S]+?)@>/g});
