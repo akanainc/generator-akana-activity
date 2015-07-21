@@ -54,39 +54,39 @@ public class <%= props.component %>ActivityValidator implements ActivityValidato
 	 *  the "To" and "From" support different types.  So they can both be in error.
 	 */
 	@Override
-	public void validate(ValidationContext context) {
-		Element activityElem = context.getActivityDefinition();
+	public void validate(ValidationContext validationContext) {
+		Element activityElem = validationContext.getActivityDefinition();
 		
 		try {
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			<%= props.component %>Activity activity = (<%= props.component %>Activity) unmarshaller.unmarshal(activityElem);
-			validateFromVariable(context, activity);
-			validateToVariable(context, activity);
+			validateFromVariable(validationContext, activity);
+			validateToVariable(validationContext, activity);
 		} catch (JAXBException ex) {
 			// can't unmarshall, so can't validate
 		}
 
 	}
 
-	private void validateFromVariable(ValidationContext context, <%= props.component %>Activity activity) {
+	private void validateFromVariable(ValidationContext validationContext, <%= props.component %>Activity activity) {
 
 	}
 
-	private void validateToVariable(ValidationContext context, <%= props.component %>Activity activity) {
+	private void validateToVariable(ValidationContext validationContext, <%= props.component %>Activity activity) {
 
 	}
 
-	private void addMismatchVarToError(ValidationContext context, ProcessVariable var) {
-		context.getReport().getEntries().add(
+	private void addMismatchVarToError(ValidationContext validationContext, ProcessVariable var) {
+		validationContext.getReport().getEntries().add(
 			new ValidationReportEntry(ValidationReportEntry.Level.WARNING,
 					ProcessValidator.ACTIVITY_INVALID_TYPE, 
-					new Object[] { context.getActivityName(), var.getName(), var.getType() }));
+					new Object[] { validationContext.getActivityName(), var.getName(), var.getType() }));
 	}
 
-	private void addMissingVarToErrors(ValidationContext context) {
-		context.getReport().getEntries().add(
+	private void addMissingVarToErrors(ValidationContext validationContext) {
+		validationContext.getReport().getEntries().add(
 			new ValidationReportEntry(ValidationReportEntry.Level.WARNING,
-					ProcessValidator.ACTIVITY_MISSING_VARS, new Object[] { context.getActivityName() }));
+					ProcessValidator.ACTIVITY_MISSING_VARS, new Object[] { validationContext.getActivityName() }));
 	}
 
 }

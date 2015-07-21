@@ -58,6 +58,30 @@ module.exports = yeoman.generators.Base.extend({
       validate: function (input) {
         return validator.isAlphanumeric(input);
       }
+    },{
+      type: 'input',
+      name: 'bundleVersion',
+      message: 'Activity Version',
+      default: this.config.get('bundleVersion') || '8.0.0',
+      validate: function (input) {
+        return input ? true : false;
+      }
+    },{
+      type: 'input',
+      name: 'gatewayBaseVersion',
+      message: 'Activity Version',
+      default: this.config.get('gatewayBaseVersion') || '7.2.0',
+      validate: function (input) {
+        return input ? true : false;
+      }
+    },{
+      type: 'input',
+      name: 'gatewayUpdateVersion',
+      message: 'Activity Version',
+      default: this.config.get('gatewayUpdateVersion') || '7.2.10',
+      validate: function (input) {
+        return input ? true : false;
+      }
     }];
 
     this.prompt(prompts, function (props) {

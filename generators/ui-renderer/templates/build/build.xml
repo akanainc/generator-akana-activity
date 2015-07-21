@@ -2,7 +2,7 @@
 
 	<property file="project.properties"/>
 	
-	<property name="bundle.file" value="${dist.dir}/<%= props.rendererPackage %>_${major.version}.${minor.version}.${micro.version}.jar"/>
+	<property name="bundle.file" value="${dist.dir}/<%= props.rendererPackage %>_${bundle.version}.jar"/>
 	<property name="spring.web.xml" value="${root.dir}/META-INF/spring/servlet-export.xml"/>
 	<property name="l10n.dir" value="${root.dir}/OSGI-INF/l10n"/>
 	
@@ -10,22 +10,26 @@
 		<include name="*.jar"/>
 	</fileset>
 
-
 	<fileset id="third.party.jars" dir="${third.party.dir}">
 		<include name="*.jar"/>
 	</fileset>
 
-	<fileset id="dependent.jars" dir="${lib.dir}">
-		<include name="**/*.jar"/>
+	<fileset id="update.dependent.jars" dir="${lib.dir}">
+		<include name="${gateway.update.dir.name}/*.jar"/>
 	</fileset>
 	
+	<fileset id="base.dependent.jars" dir="${lib.dir}">
+		<include name="${gateway.base.dir.name}/*.jar"/>
+	</fileset>
+
 	<fileset id="dist.jars" dir="${dist.dir}">
 		<include name="*.jar"/>
 	</fileset>
 	
 	<path id="base.classpath">
 		<fileset refid="model.jars"/>
-		<fileset refid="dependent.jars"/>
+		<fileset refid="update.dependent.jars"/>
+		<fileset refid="base.dependent.jars"/>
 		<fileset refid="dist.jars"/>
 	</path>
 	
@@ -36,7 +40,8 @@
 		<fileset dir="${third.party.dir}">
 			<include name="*.jar"/>
 		</fileset>
-		<fileset refid="dependent.jars"/>
+		<fileset refid="update.dependent.jars"/>
+		<fileset refid="base.dependent.jars"/>
 		<fileset dir="${build.dir}/lib">
 			<include name="*.jar"/>
 		</fileset>
