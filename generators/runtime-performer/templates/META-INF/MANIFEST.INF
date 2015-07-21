@@ -24,4 +24,3 @@ Import-Package: com.digev.fw.exception;version="6.0.0",
  javax.xml.transform.sax,
  javax.xml.transform.stream,
  org.w3c.dom
-Export-Package: <%=props.modelPackage%>;version="8.0.0"

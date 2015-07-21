@@ -69,6 +69,7 @@ module.exports = yeoman.generators.Base.extend({
       this.props.commonPackage = this.props.namespace + '.common';
       this.props.modelPackage = this.props.commonPackage + '.model';
       this.props.rendererModule = this.props.rendererPackage;
+      this.props.modelModule = this.props.modelPackage;
       this.props.performerModule = this.props.performerPackage;
       this.props.rendererFeature = this.props.rendererPackage + '.feature';
       this.props.performerFeature = this.props.performerPackage + '.feature';      
@@ -101,6 +102,11 @@ module.exports = yeoman.generators.Base.extend({
       this.composeWith('akana-activity:build-repository', {}, {
         link: 'strong'
       }) 
+    },
+    model: function(){
+      this.composeWith('akana-activity:model', {}, {
+        link: 'strong'
+      })
     },
     performer: function(){
       this.composeWith('akana-activity:runtime-performer', {}, {

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: <%=props.title%> Model
+Bundle-SymbolicName: <%=props.performerPackage%>
+Bundle-Version: 8.0.0
+Bundle-Vendor:  <%= props.author %> - <%= props.email %>
+Spring-Context: *;publish-context:=false

@@ -6,7 +6,7 @@
 	<property name="spring.web.xml" value="${root.dir}/META-INF/spring/servlet-export.xml"/>
 	<property name="l10n.dir" value="${root.dir}/OSGI-INF/l10n"/>
 	
-	<fileset id="performer.jars" dir="${performer.dist.dir}">
+	<fileset id="model.jars" dir="${model.dist.dir}">
 		<include name="*.jar"/>
 	</fileset>
 
@@ -24,7 +24,7 @@
 	</fileset>
 	
 	<path id="base.classpath">
-		<fileset refid="performer.jars"/>
+		<fileset refid="model.jars"/>
 		<fileset refid="dependent.jars"/>
 		<fileset refid="dist.jars"/>
 	</path>
