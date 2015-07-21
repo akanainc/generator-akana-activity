@@ -27,7 +27,7 @@ module.exports = yeoman.generators.Base.extend({
                                                                         'evaluate': /<@([\s\S]+?)@>/g,
                                                                         'interpolate': /<@=([\s\S]+?)@>/g});
     this.template(path.join('build', 'build.xml'), path.join(this.props.rendererModule, 'build', 'build.xml'), null, { 'interpolate': /<%=([\s\S]+?)%>/g });
-    this.template(path.join('build', 'project.properties'), path.join(this.props.rendererModule, 'build', 'project.properties'));
+    this.template(path.join('build', 'project.properties'), path.join(this.props.rendererModule, 'build', 'project.properties'), null, { 'interpolate': /<%=([\s\S]+?)%>/g});
     this.template(path.join('build', 'build.properties'), path.join(this.props.rendererModule, 'build.properties'));
     this.template('pom.xml', path.join(this.props.rendererModule, 'pom.xml'), null, { 'interpolate': /<%=([\s\S]+?)%>/g});
 

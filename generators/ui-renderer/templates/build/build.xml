@@ -6,6 +6,11 @@
 	<property name="spring.web.xml" value="${root.dir}/META-INF/spring/servlet-export.xml"/>
 	<property name="l10n.dir" value="${root.dir}/OSGI-INF/l10n"/>
 	
+	<fileset id="performer.jars" dir="${performer.dist.dir}">
+		<include name="*.jar"/>
+	</fileset>
+
+
 	<fileset id="third.party.jars" dir="${third.party.dir}">
 		<include name="*.jar"/>
 	</fileset>
@@ -19,6 +24,7 @@
 	</fileset>
 	
 	<path id="base.classpath">
+		<fileset refid="performer.jars"/>
 		<fileset refid="dependent.jars"/>
 		<fileset refid="dist.jars"/>
 	</path>
@@ -68,6 +74,7 @@
         <mkdir dir="${classes.dir}"/>
     	<mkdir dir="${jsp.src.dir}"/>
     	<mkdir dir="${tmp.webcnt.dir}"/>
+    	<mkdir dir="${dist.dir}"/>
     </target>
 
 	<target name="compile" depends="jsp_compile">
