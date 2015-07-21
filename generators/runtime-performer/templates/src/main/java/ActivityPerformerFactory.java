@@ -7,7 +7,7 @@ import javax.xml.namespace.QName;
 
 import org.w3c.dom.Node;
 
-import com.akana.activity.normalize.model.<%=props.component%>Activity;
+import <%=props.modelPackage%>.<%=props.component%>Activity;
 import com.digev.fw.exception.ErrorCode;
 import com.digev.fw.exception.GException;
 import com.digev.fw.log.Log;

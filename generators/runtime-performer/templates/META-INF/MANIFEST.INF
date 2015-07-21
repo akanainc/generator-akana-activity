@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: <%=props.title%> Runtime
+Bundle-SymbolicName: <%=props.performerPackage%>
+Bundle-Version: 8.0.0
+Bundle-Vendor:  <%= props.author %> - <%= props.email %>
+Spring-Context: *;publish-context:=false
+Import-Package: com.digev.fw.exception;version="6.0.0",
+ com.digev.fw.log;version="6.0.0",
+ com.digev.fw.xml.util;version="7.2.0",
+ com.soa.activity;version="7.2.0",
+ com.soa.fw.bind.jaxb;version="6.0.0",
+ com.soa.fw.transform;version="6.0.0",
+ com.soa.log;version="7.0.0",
+ com.soa.message;version="7.2.0",
+ com.soa.message.header;version="7.2.0",
+ javax.jbi.messaging;version="1.0.0",
+ javax.script,
+ javax.xml.bind,
+ javax.xml.bind.annotation,
+ javax.xml.namespace,
+ javax.xml.transform,
+ javax.xml.transform.dom,
+ javax.xml.transform.sax,
+ javax.xml.transform.stream,
+ org.w3c.dom
+Export-Package: <%=props.modelPackage%>;version="8.0.0"

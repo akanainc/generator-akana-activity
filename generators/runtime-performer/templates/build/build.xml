@@ -1,31 +1,24 @@
-<project name="jbi-normalize" default="all">
+<project name="<%= props.component.toLowerCase() %>-performer" default="all">
 
-	<property name="config.dir" value="../META-INF/config"/>
-	<property name="spring.dir" value="../META-INF/spring"/>
-	<property name="src.dir" value="../src"/>
-	<property name="classes.dir" value="../bin"/>
-	<property name="target.dir" value="${src.dir}" />
-	<property name="schema.dir" value="../META-INF/resources" />
-	<property name="binding.dir" value="./bindings" />
-	<property name="l10n.dir" value="../OSGI-INF/l10n"/>
+	<property file="project.properties"/>
 	
-	<property name="bundle.file" value="${dist.dir}/com.akana.activity.normalize_${major.version}.${svn.revision}.jar"/>
+	<property name="bundle.file" value="${dist.dir}/<%=props.performerPackage%>_${major.version}.${minor.version}.${micro.version}.jar"/>
 	
 	<fileset id="third.party.jars" dir="${third.party.dir}">
 		<include name="*.jar"/>
 	</fileset>
 	
-	<fileset id="soa.jars" dir="${soa.jars}">
-		<include name="*.jar"/>
-	</fileset>	
+	<fileset id="dependent.jars" dir="${lib.dir}">
+		<include name="**/*.jar"/>
+	</fileset>
 	
 	<path id="base.classpath">
 		<fileset refid="third.party.jars"/>
-		<fileset refid="soa.jars"/>
+		<fileset refid="dependent.jars"/>
     </path>	
 	
 	<path id="jaxb-classpath">
-			<fileset dir="./lib" includes="jaxb2*.jar, activation.jar, xml_stream_api.jar" />
+			<fileset dir="${root.dir}/build/lib" includes="jaxb2*.jar, activation.jar, xml_stream_api.jar" />
 	</path>
 
 	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
@@ -45,15 +38,15 @@
 
 	<target name="generate" description="Generate Manage Headers Java source files">
 		<echo message="Compiling schemas..." />
-		<xjc destdir="${target.dir}" extension="true">
+		<xjc destdir="${generated.dir}" extension="true">
 			<binding dir="${binding.dir}">
-				<include name="normalizeactivity.xjb"/>
+				<include name="activity.xjb"/>
 			</binding>
 			<schema dir="${schema.dir}">
-				<include name="normalizeactivity.xsd"/>
+				<include name="activity.xsd"/>
 			</schema>
-			<produces dir="${target.dir}">
-				<include name="com/akana/activity/normalize/model/**/*.*"/>
+			<produces dir="${generated.dir}">
+				<include name="<%=props.modelPath%>/**/*.*"/>
 			</produces>			
 		</xjc>
 	</target>
@@ -70,7 +63,7 @@
 	</target>
 	
 	<target name="bundle" depends="compile">
-		<jar destfile="${bundle.file}" manifest="../META-INF/MANIFEST.MF">
+		<jar destfile="${bundle.file}" manifest="${root.dir}/META-INF/MANIFEST.MF">
 			<fileset dir="${classes.dir}" includes="**/*.class"/>
 			<!--<zipfileset dir="${config.dir}" includes="*.*" prefix="META-INF/config"/>-->
 			<zipfileset dir="${spring.dir}" includes="*.*" prefix="META-INF/spring"/>

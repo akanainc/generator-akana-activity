@@ -9,20 +9,20 @@
   							http://www.eclipse.org/gemini/blueprint/schema/blueprint
   							http://www.eclipse.org/gemini/blueprint/schema/blueprint/gemini-blueprint.xsd">
 
-	<osgi:service ref="normalize.performer.factory" interface="com.soa.activity.ActivityPerformerFactory">
+	<osgi:service ref="<%= props.component.toLowerCase() %>.performer.factory" interface="com.soa.activity.ActivityPerformerFactory">
 		<osgi:service-properties>
-			<entry key="name" value="com.soa.normalize.performer.factory"/>
+			<entry key="name" value="<%= props.performerPackage %>.factory"/>
 		</osgi:service-properties>		
 	</osgi:service>   
 	
-	<bean id="normalize.performer.factory" class="com.akana.activity.normalize.NormalizeActivityPerformerFactory">
+	<bean id="<%= props.component.toLowerCase() %>.performer.factory" class="<%= props.performerPackage %>.<%= props.component %>ActivityPerformerFactory">
 		<property name="context" ref="jaxb.context"/>
 	</bean>
 
 	<bean id="jaxb.context" class="com.soa.fw.bind.jaxb.JAXBContextBean">
 		<property name="contextPaths">
 			<list>
-				<value>com.akana.activity.normalize.model</value>
+				<value><%= props.modelPackage %></value>
 			</list>
 		</property>
 	</bean>

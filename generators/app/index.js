@@ -102,7 +102,11 @@ module.exports = yeoman.generators.Base.extend({
         link: 'strong'
       }) 
     },
-
+    performer: function(){
+      this.composeWith('akana-activity:runtime-performer', {}, {
+        link: 'strong'
+      })
+    },
     renderer: function(){
       this.composeWith('akana-activity:ui-renderer', {}, {
         link: 'strong'
