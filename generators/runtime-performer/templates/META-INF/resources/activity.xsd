@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="http://soa.com/uri/products/activity/normalize/xsd/1.0"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ix="http://soa.com/uri/products/activity/normalize/xsd/1.0">
+	<xs:element name="NormalizeActivity">
+		<!-- Please do not modify the namespace or the name of the element. -->
+		<!-- MODIDICATION AREA BEGINS HERE -->
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MessageName"  type="xs:string"/>
+				<xs:any namespace='##any' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:anyAttribute namespace="##any" processContents="lax" />
+		</xs:complexType>
+		<!-- MODIDICATION AREA ENDS HERE -->
+	</xs:element>
+</xs:schema>

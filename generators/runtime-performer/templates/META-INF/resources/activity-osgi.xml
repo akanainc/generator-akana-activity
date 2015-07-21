@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Spring file for JBI container core OSGi services -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.eclipse.org/gemini/blueprint/schema/blueprint"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  							http://www.springframework.org/schema/beans/spring-beans.xsd
+  							http://www.eclipse.org/gemini/blueprint/schema/blueprint
+  							http://www.eclipse.org/gemini/blueprint/schema/blueprint/gemini-blueprint.xsd">
+
+	<osgi:service ref="normalize.performer.factory" interface="com.soa.activity.ActivityPerformerFactory">
+		<osgi:service-properties>
+			<entry key="name" value="com.soa.normalize.performer.factory"/>
+		</osgi:service-properties>		
+	</osgi:service>   
+	
+	<bean id="normalize.performer.factory" class="com.akana.activity.normalize.NormalizeActivityPerformerFactory">
+		<property name="context" ref="jaxb.context"/>
+	</bean>
+
+	<bean id="jaxb.context" class="com.soa.fw.bind.jaxb.JAXBContextBean">
+		<property name="contextPaths">
+			<list>
+				<value>com.akana.activity.normalize.model</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
