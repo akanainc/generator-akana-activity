@@ -134,7 +134,7 @@
 			webXmlFragment="./web.xml"
 			validateXml="true" 
 			classdebuginfo="true" 
-			package="com.akana.jsp.activity.ui" 
+			package="<%= props.rendererPackage %>" 
 			listerrors="yes" 
 			addwebxmlmappings="yes" 
 			verbose="100"  
@@ -149,14 +149,14 @@
 		<webxml-convert  webxml="${tmp.webcnt.dir}/WEB-INF/web.xml"  destfile="${spring.web.xml}" context="${context.path}"/>
 		<jar destfile="${bundle.file}" manifest="${root.dir}/META-INF/MANIFEST.MF" >
 			<fileset dir="${classes.dir}" includes="**/*.class"/>
-			<!--fileset dir="${src.dir}" casesensitive="yes">
+			<fileset dir="${java.dir}" casesensitive="yes">
 			  <patternset id="non.sources">
 			    <exclude name="**/*.java"/>
 			  </patternset>
-			</fileset-->
+			</fileset>
 			<zipfileset dir="${spring.dir}" includes="*.*" prefix="META-INF/spring"/>
 			<zipfileset dir="${resources.dir}" prefix="META-INF/resources"/>
-			<!--zipfileset dir="${webcontent.dir}" includes="**/*.xml"  prefix="WebContent"/-->
+			<zipfileset dir="${webcontent.dir}" includes="**/*.xml"  prefix="WebContent"/>
 			<zipfileset dir="${l10n.dir}" includes="**/*.*" prefix="OSGI-INF/l10n"/>
 		</jar>
 

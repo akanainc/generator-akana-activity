@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: <%=props.title%> Model
-Bundle-SymbolicName: <%=props.performerPackage%>
+Bundle-SymbolicName: <%=props.modelPackage%>
 Bundle-Version: <%= props.bundleVersion %>
 Bundle-Vendor:  <%= props.author %> - <%= props.email %>
 Spring-Context: *;publish-context:=false
+Export-Package: <%=props.modelPackage%>;version="<%=props.bundleVersion%>"

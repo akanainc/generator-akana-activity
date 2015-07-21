@@ -69,7 +69,7 @@ module.exports = yeoman.generators.Base.extend({
     },{
       type: 'input',
       name: 'gatewayBaseVersion',
-      message: 'Activity Version',
+      message: 'Gateway Base Version',
       default: this.config.get('gatewayBaseVersion') || '7.2.0',
       validate: function (input) {
         return input ? true : false;
@@ -77,7 +77,7 @@ module.exports = yeoman.generators.Base.extend({
     },{
       type: 'input',
       name: 'gatewayUpdateVersion',
-      message: 'Activity Version',
+      message: 'Gateway Cumulative Update Version',
       default: this.config.get('gatewayUpdateVersion') || '7.2.10',
       validate: function (input) {
         return input ? true : false;
@@ -91,7 +91,7 @@ module.exports = yeoman.generators.Base.extend({
       this.props.validatorPackage = this.props.rendererPackage + '.validator';
       this.props.performerPackage = this.props.namespace + '.performer';
       this.props.commonPackage = this.props.namespace + '.common';
-      this.props.modelPackage = this.props.commonPackage + '.model';
+      this.props.modelPackage = this.props.namespace + '.model';
       this.props.rendererModule = this.props.rendererPackage;
       this.props.modelModule = this.props.modelPackage;
       this.props.performerModule = this.props.performerPackage;

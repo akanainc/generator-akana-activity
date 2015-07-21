@@ -46,5 +46,9 @@
 			<property name="context" ref="jaxb.context"/>
 	</bean>
 	<osgi:service ref="<%= props.component.toLowerCase() %>.activity.validator" interface="com.soa.process.validation.ActivityValidator"/>	
+	
+	<osgix:cm-properties id="com.soa.config" persistent-id="com.soa.config"/>
+	<ctx:property-placeholder properties-ref="com.soa.config"/>
+	
 		
 </beans>
