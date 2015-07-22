@@ -146,6 +146,11 @@ module.exports = yeoman.generators.Base.extend({
       this.composeWith('akana-activity:nd-feature', {}, {
         link: 'strong'
       })
+    },
+    pmfeature: function(){
+      this.composeWith('akana-activity:pm-feature', {}, {
+        link: 'strong'
+      })
     }
   },
 

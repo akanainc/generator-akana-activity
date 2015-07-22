@@ -1,16 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: <%=props.title%> Plugin for Network Director
-Bundle-Description: This feature must be installed in Network Director to provide support for the '<%=props.title%>' process activity. <%=props.description%>.
-Bundle-SymbolicName: <%=props.performerFeature%>
+Bundle-Name: <%=props.title%> Plugin for Policy Manager
+Bundle-Description: This feature must be installed along with the Policy Manager Console to provide support for the '<%=props.title%>' process activity. <%=props.description%>. 
+Bundle-SymbolicName: <%=props.rendererFeature%>
 Bundle-Category: x-soa-plugin
 Bundle-Version: <%=props.bundleVersion%>
 Bundle-Vendor: <%= props.author %> - <%= props.email %>
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .,
  META-INF/resources/
-Require-Bundle: <%=props.modelPackage%>;bundle-version="<%=props.bundleVersion%>"
- <%=props.performerModule%>;bundle-version="<%=props.bundleVersion%>"
+Require-Bundle: <%=props.modelPackage%>;bundle-version="<%=props.bundleVersion%>",
+ <%=props.rendererPackage%>;bundle-version="<%=props.bundleVersion%>"
 Import-Package: com.digev.fw.exception;version="6.0.0",
  com.soa.admin.service.tasks;version="6.0.0",
  com.soa.admin.service.tasks.impl;version="6.0.0",
