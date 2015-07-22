@@ -1,5 +1,4 @@
 <project name="<%= props.component.toLowerCase() %>-feature-pm" default="all">
-
 	
 	<property file="project.properties"/>
 	
@@ -16,5 +15,5 @@
 			<zipfileset dir="${spring.dir}" includes="*.*" prefix="META-INF/spring"/>
 		</jar>
 	</target>	
-	
+
 </project>

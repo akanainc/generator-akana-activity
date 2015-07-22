@@ -5,7 +5,7 @@ Bundle-SymbolicName: <%=props.performerPackage%>
 Bundle-Version: <%= props.bundleVersion %>
 Bundle-Vendor:  <%= props.author %> - <%= props.email %>
 Spring-Context: *;publish-context:=false
-Import-Package: <%=props.modelPackage%>;version="<%=props.bundleVersion%>"
+Import-Package: <%=props.modelPackage%>;version="<%=props.bundleVersion%>",
  com.digev.fw.exception;version="6.0.0",
  com.digev.fw.log;version="6.0.0",
  com.digev.fw.xml.util;version="7.2.0",
