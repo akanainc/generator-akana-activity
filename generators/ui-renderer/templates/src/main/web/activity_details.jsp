@@ -38,7 +38,7 @@
 		<logic:notEmpty name="bean" property="errorMessage"><span class="error"><%= com.soa.console.util.Encoder.escapeHTML(bean.getErrorMessage())%></span>
 		</logic:notEmpty>
 	</div>
-	<!--p>
+	<!--p><%--
 		<span class="fieldname_nowrap col1"><workbench:message key="<@=props.namespace@>.message"/>:</span>
 		<input type="hidden" name="messageName" value="<bean:write name="bean" property="messageName"/>"/>
 		<select name="messageNameSelect">
@@ -49,7 +49,7 @@
 				</option>
 			</logic:iterate>
 		</select>
-	</p-->
+	</p--> --%>
 
 </fieldset>
 </td></tr></table>

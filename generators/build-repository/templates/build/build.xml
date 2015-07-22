@@ -107,7 +107,7 @@
         	    quiet="true" 
         		name="<%= props.title %> Repository"
         		root="${dist.dir}" 
-        		urlTemplate="file://${dist.dir}/%f">
+        		urlTemplate="%p/%f">
     		<fileset dir="${dist.dir}">
     			<include name="*.jar"/>
     		</fileset>       	

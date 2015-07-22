@@ -84,7 +84,7 @@
 
 	<target name="compile" depends="jsp_compile">
 		<echo>compiling <%= props.rendererPackage %> JSPs</echo>
-  		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debug.level}" 
+  		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debuglevel}" 
   			optimize="off"
   			nowarn="${nowarn}" target="${compile.version}">
   			<src path="${src.dir}"/>
@@ -100,7 +100,7 @@
 		<echo level="verbose">compiling <%= props.rendererPackage %> Classes</echo>
 		<delete dir="${classes.dir}"/>
 		<mkdir dir="${classes.dir}"/>
-  		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debug.level}" 
+  		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debuglevel}" 
   			optimize="off"
   			nowarn="${nowarn}" target="${compile.version}">
   			<src path="${src.dir}"/>
