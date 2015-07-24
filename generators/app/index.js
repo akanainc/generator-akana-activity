@@ -104,6 +104,7 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
+      this.template('pom.xml', 'pom.xml', null, { 'interpolate': /<%=([\s\S]+?)%>/g});
 
     },
 
