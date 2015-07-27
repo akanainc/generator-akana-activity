@@ -14,7 +14,6 @@ Create symlink to the `lib` folder under your Policy Manager installation direct
 ln -s $AKANA_HOME/sm72/lib/ lib
 ```
 
-
 To generate an Eclipse project
 
 ```bash
@@ -28,9 +27,12 @@ cd build
 ant
 ```
 
+Build artifact: OSGi Repository
+Artifact: /build/<%= props.component.toLowerCase() %>-<%= props.bundleVersion %>.zip
+
 To deploy the build
 
-Take the built jar file and drop it under the `$AKANA_HOME/sm72/instances/$ND_INSTANCE_NAME/deploy` folder
+Take the built ./build/dist/<%= props.component.toLowerCase() %>-<%= props.bundleVersion %>.zip file and unzip it under the `$AKANA_HOME/sm72/lib` folder. Use Admin console to install the 'Plugin'
 
 ---
 
