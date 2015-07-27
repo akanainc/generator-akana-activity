@@ -59,7 +59,7 @@
 	<target name="compile" depends="init">
 		<echo>Compiling model</echo>
 		<javac source="${source.version}" bootclasspath="${boot.classpath}" destdir="${classes.dir}" debug="${javacdebug}" debuglevel="${debuglevel}" nowarn="${nowarn}" target="${compile.version}">
-  			<src path="${src.dir}"/>
+  			<src path="${java.dir}"/>
   			<include name="**/*.java"/>
   			<classpath>
   				<path refid="jaxb.classpath"/>
