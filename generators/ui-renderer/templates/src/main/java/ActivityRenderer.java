@@ -37,7 +37,7 @@ public class <%= props.component %>ActivityRenderer extends BaseActivityRenderer
 	@Override
 	public Element createDefaultDefinition() throws GException {
 		<%= props.component %>Activity activity = new <%= props.component %>Activity();
-		//activity.setMessageName("message");
+		activity.setMessageName("message");
 		return buildActivityElement(activity, context, builders);
 	}
 
