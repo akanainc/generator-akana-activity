@@ -40,7 +40,7 @@
 	</div>
 	<%-- <!--p>
 		<span class="fieldname_nowrap col1"><workbench:message key="<@=props.namespace@>.message"/>:</span>
-		<input type="hidden" name="messageName" value="<bean:write name="bean" property="messageName"/>"/>
+		<input type="hidden" name="messageName" value="<bean:write name="bean" property="activity.messageName"/>"/>
 		<select name="messageNameSelect">
 			<logic:iterate id="variable" name="bean" property="activityVariables">
 				<option title="<bean:write name="variable" property="type" />"

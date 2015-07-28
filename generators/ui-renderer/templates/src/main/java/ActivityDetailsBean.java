@@ -24,11 +24,21 @@ public class <%= props.component %>ActivityDetailsBean extends BaseActivityDetai
 	public static final String[] SUPPORTED_ACTIVITY_VARIABLES = {Variable.MESSAGE};
 	public static final String[] SUPPORTED_HEADER_VARIABLES = {Variable.STRING};
 
-	private <%= props.component %>Activity activity;
+	
+	public String getMessageName() {
+		return messageName;
+	}
+
+	public void setMessageName(String messageName) {
+		this.messageName = messageName;
+	}
+
+	private String messageName;
 
 	@Override
 	protected void extractValuesFromParameters(HttpServletRequest request) {
-		
+		//part of error handling routine. form gets re-populated here
+		this.messageName = (String) request.getAttribute("messageName");
 	}
 
 	@Override
@@ -36,7 +46,7 @@ public class <%= props.component %>ActivityDetailsBean extends BaseActivityDetai
 		try {
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			<%= props.component %>Activity activity = (<%= props.component %>Activity) unmarshaller.unmarshal(activityElem);
-			this.activity = activity;
+			this.messageName = activity.getMessageName();
 
 		} catch (JAXBException je) {
 			log.error(je);

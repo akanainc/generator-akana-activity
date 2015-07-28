@@ -23,15 +23,8 @@ public class <%=props.component%>ActivityPerformer implements ActivityPerformer 
 		try {
 			log.startTraceBlock("<%=props.component%>ActivityPerformer.perform()");
 			
+			auditLogger.warn("You have selected [" + activity.getMessageName() + "]");
 			Message message = getMessage((Object) context.getVariable(activity.getMessageName()));
-			
-			if (message != null) {
-				Message normalizedMessage = message.normalize();
-				context.setVariable(activity.getMessageName(), normalizedMessage);
-								
-			} else {
-				auditLogger.warn("No message found for [" + activity.getMessageName() + "]");
-			}
 			
 		} catch (GException ex) {
 			try {

@@ -26,8 +26,11 @@ public class <%= props.component %>ActivityRenderer extends BaseActivityRenderer
 
 	private <%= props.component %>Activity buildActivity(HttpServletRequest request) throws GException {
 		<%= props.component %>Activity activity = new <%= props.component %>Activity();
-		//String messageName = request.getParameter("messageName");
-		//activity.setMessageName(messageName);
+		String messageName = request.getParameter("messageName");
+		
+		//Validate values from UI. If validation fails throw a GException with an appropriate message 
+
+		activity.setMessageName(messageName);
 		return activity;
 	}
 
