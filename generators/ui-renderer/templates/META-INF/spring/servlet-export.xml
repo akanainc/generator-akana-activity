@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:osgi='http://www.springframework.org/schema/osgi' xmlns:util='http://www.springframework.org/schema/util' xsi:schemaLocation='http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd'>
+	<osgi:service interface='com.soa.transport.http.deploy.WebAppRegistration'>
+		<bean class='com.soa.transport.http.deploy.impl.SimpleWebAppRegistration'>
+			<property name='context' value='${context.path}'/>
+			<property name='servlets'>
+				<list>
+					<ref bean='<%= props.rendererPackage %>.jsp.activity_005fdetails_jsp'/>
+				</list>
+			</property>
+		</bean>
+	</osgi:service>
+
+	<bean class='com.soa.transport.http.deploy.impl.SimpleServletRegistration' id='<%= props.rendererPackage %>.jsp.activity_005fdetails_jsp'>
+		<property name='name' value='<%= props.rendererPackage %>.jsp.activity_005fdetails_jsp'/>
+		<property name='pathSpec' value='/<%= props.rendererPackage %>/activity_details.jsp'/>
+		<property name='servlet'>
+			<bean class='<%= props.rendererPackage %>.jsp.activity_005fdetails_jsp'/>
+		</property>
+		<property name='initOnStartup' value='true'/>
+	</bean>
+
+</beans>

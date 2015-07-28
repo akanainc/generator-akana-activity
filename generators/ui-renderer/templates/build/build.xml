@@ -48,7 +48,7 @@
 		<pathelement location="${build.dir}/target/classes"/>
     </path>
 	
-	<taskdef name="webxml-convert" classname="com.soa.ant.j2ee.WebXMLConverterTask" classpathref="tools.classpath"/>	
+	<!--taskdef name="webxml-convert" classname="com.soa.ant.j2ee.WebXMLConverterTask" classpathref="tools.classpath"/-->	
 		
 	<taskdef name="jasper2" classname="org.apache.jasper.JspC">
 		<classpath>
@@ -134,7 +134,7 @@
 			webXmlFragment="./web.xml"
 			validateXml="true" 
 			classdebuginfo="true" 
-			package="<%= props.rendererPackage %>" 
+			package="<%= props.rendererPackage %>.jsp" 
 			listerrors="yes" 
 			addwebxmlmappings="yes" 
 			verbose="100"  
@@ -146,7 +146,7 @@
 
 	<target name="bundle" depends="compile">
 		<echo>creating <%= props.rendererPackage %> jar</echo>
-		<webxml-convert  webxml="${tmp.webcnt.dir}/WEB-INF/web.xml"  destfile="${spring.web.xml}" context="${context.path}"/>
+		<!--webxml-convert  webxml="${tmp.webcnt.dir}/WEB-INF/web.xml"  destfile="${spring.web.xml}" context="${context.path}"/-->
 		<jar destfile="${bundle.file}" manifest="${root.dir}/META-INF/MANIFEST.MF" >
 			<fileset dir="${classes.dir}" includes="**/*.class"/>
 			<fileset dir="${java.dir}" casesensitive="yes">

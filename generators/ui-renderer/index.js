@@ -22,7 +22,7 @@ module.exports = yeoman.generators.Base.extend({
 
     this.directory('src/main/web/WEB-INF/tlds', path.join(this.props.rendererModule, 'src/main/webapps/WEB-INF/tlds'));
     this.template(path.join('src/main/web/WEB-INF', 'web.xml'), path.join(this.props.rendererModule, 'src/main/webapps/WEB-INF', 'web.xml'));
-    this.template(path.join('src/main/web', 'activity_details.jsp'), path.join(this.props.rendererModule, 'src/main/webapps', this.props.rendererPackage, 'activity_details.jsp'), null, {
+    this.template(path.join('src/main/web', 'activity_details.jsp'), path.join(this.props.rendererModule, 'src/main/webapps', 'activity_details.jsp'), null, {
                                                                         'escape': /<@-([\s\S]+?)@>/g,
                                                                         'evaluate': /<@([\s\S]+?)@>/g,
                                                                         'interpolate': /<@=([\s\S]+?)@>/g});
@@ -34,6 +34,7 @@ module.exports = yeoman.generators.Base.extend({
     this.directory('META-INF/resources', path.join(this.props.rendererModule, 'META-INF/resources'));
     this.template(path.join('META-INF/spring', 'activity-ui-osgi.xml'), path.join(this.props.rendererModule,'META-INF/spring', this.props.component.toLowerCase()  +'-activity-ui-osgi.xml'), null, { 'interpolate': /<%=([\s\S]+?)%>/g });
     this.template(path.join('META-INF/spring', 'activity-ui-servlet.xml'), path.join(this.props.rendererModule,'META-INF/spring', this.props.component.toLowerCase()  +'-activity-ui-servlet.xml'), null, { 'interpolate': /<%=([\s\S]+?)%>/g });
+    this.template(path.join('META-INF/spring', 'servlet-export.xml'), path.join(this.props.rendererModule,'META-INF/spring', 'servlet-export.xml'), null, { 'interpolate': /<%=([\s\S]+?)%>/g });
     this.template(path.join('META-INF', 'MANIFEST.INF'), path.join(this.props.rendererModule, 'META-INF', 'MANIFEST.MF'));
 
     this.template(path.join('OSGI-INF', 'message.properties'), path.join(this.props.rendererModule, 'OSGI-INF/l10n', 'message.properties'));
