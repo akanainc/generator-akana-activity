@@ -38,7 +38,7 @@ yo akana-activity
 Create symlink to the `lib` folder under your Policy Manager installation directory.
 
 ```bash
-ln -s ~/soa/demo7/sm72/lib/ lib
+ln -s ~/soa/demo8/sm80/lib/ lib
 ```
 
 
