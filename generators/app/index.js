@@ -68,8 +68,16 @@ module.exports = yeoman.generators.Base.extend({
       }
     },{
       type: 'input',
+      name: 'akanaPlatformVersion',
+      message: 'Akana Platform Release Version',
+      default: this.config.get('akanaPlatformVersion') || '8.1.0',
+      validate: function (input) {
+        return input ? true : false;
+      }
+    },{
+      type: 'input',
       name: 'gatewayBaseVersion',
-      message: 'Gateway Base Version',
+      message: 'API Gateway Release Version',
       default: this.config.get('gatewayBaseVersion') || '8.0.0',
       validate: function (input) {
         return input ? true : false;
@@ -77,7 +85,7 @@ module.exports = yeoman.generators.Base.extend({
     },{
       type: 'input',
       name: 'gatewayUpdateVersion',
-      message: 'Gateway Cumulative Update Version',
+      message: 'API Gateway Cumulative Update Version',
       default: this.config.get('gatewayUpdateVersion') || '8.0.1',
       validate: function (input) {
         return input ? true : false;

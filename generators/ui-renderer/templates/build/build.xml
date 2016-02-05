@@ -22,6 +22,10 @@
 		<include name="${gateway.base.dir.name}/*.jar"/>
 	</fileset>
 
+	<fileset id="akana.platform.jars" dir="${lib.dir}">
+		<include name="${akana.platform.dir.name}/*.jar"/>
+	</fileset>
+
 	<fileset id="dist.jars" dir="${dist.dir}">
 		<include name="*.jar"/>
 	</fileset>
@@ -29,6 +33,7 @@
 	<path id="base.classpath">
 		<fileset refid="model.jars"/>
 		<!-- fileset refid="update.dependent.jars"/-->
+		<fileset refid="akana.platform.jars"/>
 		<fileset refid="base.dependent.jars"/>
 		<fileset refid="dist.jars"/>
 	</path>
@@ -41,6 +46,7 @@
 			<include name="*.jar"/>
 		</fileset>
 		<!--fileset refid="update.dependent.jars"/-->
+		<fileset refid="akana.platform.jars"/>
 		<fileset refid="base.dependent.jars"/>
 		<fileset dir="${build.dir}/lib">
 			<include name="*.jar"/>
