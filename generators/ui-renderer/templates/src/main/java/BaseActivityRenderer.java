@@ -24,19 +24,34 @@ import javax.xml.parsers.DocumentBuilder;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * A base class containing a number of common methods for activities. 
+ * At some point this should probably be moved into the core product or a common framework. 
+ * 
+ * @author 
+ *
+ */
+@SuppressWarnings("serial")
 public abstract class BaseActivityRenderer implements ActivityRenderer {
-
+	//The JAXB context used to marshall/unmarshall the definition. This is set via spring.
 	protected JAXBContext context;
+
+	//The DOMBuilderPool used to create DOM objects for the activity definition. This is set via spring. 
 	protected DOMBuilderPool builders;
 
+	//The name of the activity - same as the one in the user interface
 	private String activityName;
+	//The process key - same as the one in the user interface
 	private String processKey;
+	//The Process Context which includes all the process variables and activities
 	private ProcessActivitiesContext processContext;
+	//The definition of this activity
 	private ProcessActivitiesInfo activityInfo;
+	//The locale of the HTTP request
 	private Locale locale;
-
+	//The MessageSource for all localized messages registered via Spring
 	private static MessageSource messageSource;
-
+	//Create an instance of the Log to use in this class
 	private static final Log log = Log.getLog(BaseActivityRenderer.class);
 
 	public void setContext(JAXBContext context) {
@@ -47,6 +62,12 @@ public abstract class BaseActivityRenderer implements ActivityRenderer {
 		this.builders = builders;
 	}
 
+	/**
+	 * A utility method to retrieve the ProcessContext, Activity Name, ActivityInfo and Local from the HTTP request
+	 * 
+	 * @param request 
+	 * @throws GException
+	 */
 	public void initializeRenderer(HttpServletRequest request) throws GException {
 		processKey = request.getParameter("processKey");
 		ActivityRequestContents requestContents = new ActivityRequestContents(request.getSession(),
@@ -65,7 +86,15 @@ public abstract class BaseActivityRenderer implements ActivityRenderer {
 
 	}
 
-
+	/**
+	 * A utility method the builds the DOM object for the activity definition based on the JAXBElement and JAXBContext
+	 * 
+	 * @param activity
+	 * @param context
+	 * @param builders
+	 * @return the DOM object for the activity definition
+	 * @throws GException
+	 */
 	protected Element buildActivityElement(Object activity, JAXBContext context, DOMBuilderPool builders)
 			throws GException {
 		DocumentBuilder builder = null;
@@ -89,6 +118,12 @@ public abstract class BaseActivityRenderer implements ActivityRenderer {
 		}
 	}
 
+	/**
+	 * Gets the activity type. This type is used as a key by the framework when looking
+	 * for a renderer for an activity.
+	 *
+	 * @return the activity type
+	 */
 	public String getActivityType() {
 		return ActivitySummary.INTERNAL_ACTIVITY_TYPE;
 	}
@@ -97,6 +132,14 @@ public abstract class BaseActivityRenderer implements ActivityRenderer {
 		BaseActivityRenderer.messageSource = messageSource;
 	}
 
+
+	/**
+	 * Returns the localized message for a key
+	 * 
+	 * @param locale
+	 * @param key
+	 * @return
+	 */
 	public String getLocalMessage(Locale locale, String key) {
 		return getLocalMessage(locale, key, new String[] {});
 	}

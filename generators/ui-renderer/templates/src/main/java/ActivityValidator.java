@@ -15,6 +15,13 @@ import com.soa.process.validation.ValidationReportEntry;
 
 import <%= props.modelPackage %>.*;
 
+/**
+ * Validation that is aclled when the process is saved
+ *  
+ * @see http://docs.akana.com/ag/assets/apiDocs_pm80/com/soa/process/validation/ActivityValidator.html
+ * @author 
+ *
+ */
 public class <%= props.component %>ActivityValidator implements ActivityValidator {
 
 	private JAXBContext context;
@@ -27,17 +34,23 @@ public class <%= props.component %>ActivityValidator implements ActivityValidato
 		this.context = context;
 	}
 
+	/** 
+	 * @see http://docs.akana.com/ag/assets/apiDocs_pm80/com/soa/process/validation/ActivityValidator.html#getActivityName--
+	 */
 	@Override
 	public QName getActivityName() {
 		return INTERNAL_NAME;
 	}
 
+	/** 
+	 * @see http://docs.akana.com/ag/assets/apiDocs_pm80/com/soa/process/validation/ActivityValidator.html#getActivityType--
+	 */
 	@Override
 	public String getActivityType() {
 		return getActivityName().getLocalPart();
 	}
 
-	/* InsertContentValidator will check for missing "To" variable, "From" variable 
+	/** InsertContentValidator will check for missing "To" variable, "From" variable 
 	 * and mis-matched types.
 	 * 
 	 * Changes can be made on the variable detail page, which affect processing of
@@ -52,6 +65,8 @@ public class <%= props.component %>ActivityValidator implements ActivityValidato
 	 *  If variable type is not in the supported list of types,
 	 *  for either "To" or "From", then add to error messages. This is because
 	 *  the "To" and "From" support different types.  So they can both be in error.
+	 *	
+	 * @see http://docs.akana.com/ag/assets/apiDocs_pm80/com/soa/process/validation/ActivityValidator.html#validate-com.soa.process.validation.ValidationContext-
 	 */
 	@Override
 	public void validate(ValidationContext validationContext) {

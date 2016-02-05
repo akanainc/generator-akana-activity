@@ -70,7 +70,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'input',
       name: 'gatewayBaseVersion',
       message: 'Gateway Base Version',
-      default: this.config.get('gatewayBaseVersion') || '7.2.0',
+      default: this.config.get('gatewayBaseVersion') || '8.0.0',
       validate: function (input) {
         return input ? true : false;
       }
@@ -78,7 +78,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'input',
       name: 'gatewayUpdateVersion',
       message: 'Gateway Cumulative Update Version',
-      default: this.config.get('gatewayUpdateVersion') || '7.2.10',
+      default: this.config.get('gatewayUpdateVersion') || '8.0.1',
       validate: function (input) {
         return input ? true : false;
       }

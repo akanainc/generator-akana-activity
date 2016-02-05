@@ -11,9 +11,9 @@ Bundle-ClassPath: .,
  META-INF/resources/
 Require-Bundle: <%=props.modelPackage%>;bundle-version="<%=props.bundleVersion%>",
  <%=props.rendererPackage%>;bundle-version="<%=props.bundleVersion%>"
-Import-Package: com.digev.fw.exception;version="6.0.0",
- com.soa.admin.service.tasks;version="6.0.0",
- com.soa.admin.service.tasks.impl;version="6.0.0",
- com.soa.admin.service.tasktemplate;version="6.0.0",
- com.soa.admin.service.tasktemplate.impl;version="6.0.0",
- com.soa.admin.task.spring;version="6.0.0"
+Import-Package: com.digev.fw.exception;version="8.0.0",
+ com.soa.admin.service.tasks;version="8.0.0",
+ com.soa.admin.service.tasks.impl;version="8.0.0",
+ com.soa.admin.service.tasktemplate;version="8.0.0",
+ com.soa.admin.service.tasktemplate.impl;version="8.0.0",
+ com.soa.admin.task.spring;version="8.0.0"

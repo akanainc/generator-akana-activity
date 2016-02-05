@@ -22,6 +22,13 @@ import com.soa.console.activity.ProcessActivitiesInfo;
 import com.soa.console.activity.VariableInfo;
 import com.soa.portal.PortalConstants;
 
+/**
+ * A base class containing a number of common methods for activities. 
+ * At some point this should probably be moved into the core product or a common framework. 
+ * 
+ * @author 
+ *
+ */
 @SuppressWarnings("serial")
 public abstract class BaseActivityDetailsBean implements ActivityDetails, Serializable {
 	private static final Log log = Log.getLog(BaseActivityDetailsBean.class);
@@ -31,20 +38,27 @@ public abstract class BaseActivityDetailsBean implements ActivityDetails, Serial
 	private String processKey;
 	private ProcessActivitiesContext processContext;
 	private ProcessActivitiesInfo activityInfo;
+	//The locale of the HTTP request
 	private Locale locale;
-	
+	//The MessageSource for all localized messages registered via Spring
 	private static MessageSource messageSource;
 	
 	public void setMessageSource(MessageSource messageSource) {
 		BaseActivityDetailsBean.messageSource = messageSource;
 	}
-	
+	//The JAXB context used to marshall/unmarshall the definition. This is set via spring.
 	protected static JAXBContext context;
 
 	public void setContext(JAXBContext context) {
 		BaseActivityDetailsBean.context = context;
 	}
 
+	/**
+	 * Initialize the bean by retrieving the ProcessContext, Activity Name, ActivityInfo and Local from the HTTP request
+	 * 
+	 * @param request 
+	 * @throws GException
+	 */
 	public void setup(HttpServletRequest request) {
 		try {
 			log.startTraceBlock(this.getClass().getName() + ".setup()");
@@ -68,8 +82,18 @@ public abstract class BaseActivityDetailsBean implements ActivityDetails, Serial
 		}
 	}
 
+	/**
+	 * Used to populate the bean from the request in order to re-render the page in the event of an error
+	 * 
+	 * @param request
+	 */
 	protected abstract void extractValuesFromParameters(HttpServletRequest request);
-
+	/**
+	 * Used to populate the bean from the activity configuration 
+	 * 
+	 * @param activityElem
+	 * @throws GException
+	 */
 	protected abstract void setupActivity(Element activityElem) throws GException;
 
 	public String getErrorMessage() {
@@ -84,7 +108,12 @@ public abstract class BaseActivityDetailsBean implements ActivityDetails, Serial
 		return getErrorMessage() != null && !getErrorMessage().isEmpty();
 	}
 
-
+	/**
+	 * Initialize the bean by retrieving the ProcessContext, Activity Name, ActivityInfo and Local from the HTTP request
+	 * 
+	 * @param request 
+	 * @throws GException
+	 */
 	public void initializeDetails(HttpServletRequest request) throws GException {
 		processKey = request.getParameter("processKey");
 		ActivityRequestContents requestContents = new ActivityRequestContents(request.getSession(),
@@ -107,16 +136,37 @@ public abstract class BaseActivityDetailsBean implements ActivityDetails, Serial
 	public List<VariableInfo> getAvailableVariables() {
 		return processContext.getVariables();
 	}
-	
+
+	/**
+	 * Returns the localized message for a key
+	 * 
+	 * @param locale
+	 * @param key
+	 * @return
+	 */
 	public String getLocalMessage(Locale locale, String key) {
 		return getLocalMessage(locale, key, new String[] {});
 	}
 
+	/**
+	 * Returns the localized message for a key
+	 * 
+	 * @param locale
+	 * @param key
+	 * @param args
+	 * @return
+	 */
 	public String getLocalMessage(Locale locale, String key, String args[]) {
 		String msg = (messageSource == null ? "" : messageSource.getFormattedMessage(locale, key, args));
 		return (msg == null ? "" : msg);
 	}
 	
+	/**
+	 * Returns a list of variables that match a list of variable types
+	 * 
+	 * @param types
+	 * @return a list of variables available in the process
+	 */
 	protected List<VariableInfo> getSupportedVariables(List<String> types) {
 		List<VariableInfo> variables = new ArrayList<VariableInfo>();
 		for (VariableInfo varDetail : getAvailableVariables()) {

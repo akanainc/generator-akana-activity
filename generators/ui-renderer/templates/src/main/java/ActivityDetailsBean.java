@@ -32,15 +32,21 @@ public class <%= props.component %>ActivityDetailsBean extends BaseActivityDetai
 	public void setMessageName(String messageName) {
 		this.messageName = messageName;
 	}
-
+	//A sample attribute of the activity configuration that is displayed on the JSP page
 	private String messageName;
 
+	/* (non-Javadoc)
+	 * @see <%= props.rendererPackage %>.BaseActivityDetailsBean#extractValuesFromParameters(javax.servlet.http.HttpServletRequest)
+	 */
 	@Override
 	protected void extractValuesFromParameters(HttpServletRequest request) {
 		//part of error handling routine. form gets re-populated here
 		this.messageName = (String) request.getAttribute("messageName");
 	}
 
+	/* (non-Javadoc)
+	 * @see <%= props.rendererPackage %>.BaseActivityDetailsBean#setupActivity(org.w3c.dom.Element)
+	 */
 	@Override
 	protected void setupActivity(Element activityElem) throws GException {
 		try {
@@ -53,7 +59,10 @@ public class <%= props.component %>ActivityDetailsBean extends BaseActivityDetai
 			throw new GException(ErrorCode.ERR_UNMARSHALLING, new Object[] { je.getLocalizedMessage() });
 		}
 	}
-
+	
+	/**
+	 * @return a list of variables available in the process
+	 */
 	public List<VariableInfo> getActivityVariables() {
 		return getSupportedVariables(Arrays.asList(SUPPORTED_ACTIVITY_VARIABLES));
 	}
