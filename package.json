@@ -1,6 +1,6 @@
 {
   "name": "generator-akana-activity",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Yeoman generator - Akana Process Activity",
   "license": "Apache-2.0",
   "main": "generators/app/index.js",
